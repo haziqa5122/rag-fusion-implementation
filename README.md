@@ -14,6 +14,24 @@ RAG Fusion was introduced to address the limitations of traditional RAG systems.
 - **Simple Concatenation:** Concatenates retrieved documents for input to the LLM, though it may face context window limitations.
   
 ---
+## Implementation Steps
+
+### **1. Environment Setup**
+- Install necessary libraries, including `openai`.
+- Configure the OpenAI API key to enable interaction with LLMs.
+
+### **2. Generate Diverse Queries**
+- Use an LLM (e.g., GPT-3.5) to create multiple variations of the original query for broader retrieva.
+
+### **3. Perform Vector Search**
+- Retrieve relevant documents for each query.
+
+### **4. Apply Reciprocal Rank Fusion (RRF)**
+- Aggregate results to prioritize documents that consistently rank high.
+
+### **5. Generate the Final Output**
+- Combine reranked results with generated queries for the final response.
+---
 
 ## Benefits of RAG Fusion
 - **Comprehensive Responses:** Leverages multiple sources for nuanced and complete answers.
