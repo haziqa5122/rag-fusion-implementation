@@ -1,39 +1,43 @@
-# RAG Fusion Implementation
-RAG Fusion was introduced to address the limitations of traditional RAG systems. It extends RAG's capabilities by retrieving and fusing information from multiple documents, leading to more comprehensive and informative responses.
+# Parent Document Retrieval (PDR) with LangChain
+---
+## Overview
+Retrieval-Augmented Generation (RAG) systems excel at providing precise, fact-based responses by breaking down documents into smaller chunks for retrieval. However, this approach often sacrifices depth and coherence, especially for broad or complex queries.
 
-### **How RAG Fusion Works**
-- **Query Diversification:** The system generates diverse queries from user input to retrieve information from multiple knowledge bases or perspectives.
-- **Information Fusion:** Retrieved information is synthesized into a unified response using one or more fusion methods, enhancing the quality and reliability of the output.
-
+**Parent Document Retrieval (PDR)** bridges this gap by implementing a two-tier retrieval system:
+- **Chunk Retrieval:** elevant smaller "child" chunks are retrieved first.
+- **Parent Document Retrieval:** Once relevant chunks are identified, their corresponding parent documents are retrieved to provide broader context.
 ---
 
-## Fusion Approaches
-- **Reciprocal Rank Fusion (RRF):** Combines ranked lists by calculating scores based on document positions across multiple queries.
-- **Weighted Averaging:** Uses relevance scores to combine document embeddings or representations.
-- **Ensemble Methods:** Merges results from different retrieval models or databases.
-- **Simple Concatenation:** Concatenates retrieved documents for input to the LLM, though it may face context window limitations.
+## Benefits of PDR
+- **Improved Coherence:** Enhances responses by leveraging full-document context.
+- **Enhanced Understanding:** Broadens the knowledge base for better insights.
+- **Reduced Ambiguity:** Resolves potential ambiguities by considering the entire document.
+- **Ideal for Long-Form Content:** Ensures continuity and relevance in detailed responses.
   
 ---
 ## Implementation Steps
 
 ### **1. Environment Setup**
-- Install necessary libraries, including `openai`.
+- Install necessary libraries, including `openai`, `langchain-community`, `chromadb` and `tiktoken`
 - Configure the OpenAI API key to enable interaction with LLMs.
 
-### **2. Generate Diverse Queries**
-- Use an LLM (e.g., GPT-3.5) to create multiple variations of the original query for broader retrieva.
+### **2. Load and Prepare Documents**
+- Load documents from a website or directory.
+- Define chunk sizes.
 
-### **3. Perform Vector Search**
-- Retrieve relevant documents for each query.
+### **3. Create Vector Store and Retriever**
+- Index child chunks and store parent documents.
 
-### **4. Apply Reciprocal Rank Fusion (RRF)**
-- Aggregate results to prioritize documents that consistently rank high.
+### **4. Test the Retriever**
+- Count Parent and Child Documents.
+- Perform a Query
 
-### **5. Generate the Final Output**
-- Combine reranked results with generated queries for the final response.
+### **5. enerate Responses**
+- Define a prompt template and generate responses using GPT.
 ---
 
-## Benefits of RAG Fusion
-- **Comprehensive Responses:** Leverages multiple sources for nuanced and complete answers.
-- **Reduced Bias:** Balances perspectives by relying on diverse documents.
-- **Improved Accuracy:** Broadens information access for factually correct outputs.
+## Applications of PDR
+- **Customer Support:** Enhanced response accuracy for product-related queries.
+- **Legal Research:** Retrieval of legal documents with broader context for clarity.
+- **Academic Research:** Facilitating access to comprehensive research papers.
+- **Content Generation:** Improved continuity and depth in AI-generated content.
